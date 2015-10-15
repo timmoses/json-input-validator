@@ -1,0 +1,38 @@
+{
+  "name": "json-validator",
+  "description": "node.js module to clean and validate JSON input.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/timmoses/json-validator",
+  "author": "Tim Moses <tim@moses.com> (http://tim.moses.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timmoses/json-validator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timmoses/json-validator/issues"
+  },
+  "licenses": [
+    {
+      "type": "GNU",
+      "url": "https://github.com/timmoses/json-validator/blob/master/LICENSE-GNU"
+    }
+  ],
+  "main": "lib/json-validator",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [],
+  "directories": {
+    "test": "test"
+  },
+  "license": "GNU"
+}
