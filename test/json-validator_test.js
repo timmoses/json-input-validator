@@ -901,8 +901,72 @@ exports.checkinput = {
 				arrayValue:			['a'],
 				objectValue:		{'a':1},
 			},
+			error: [],
 			isModified: false,
 			messages: []
+		}, 'objects should match');
+		test.done();
+	},
+	examples: function(test) {
+		test.expect(2);
+		var fields = [
+			{
+				name:		'email_address',
+				type:		'string',
+				format:		'email',
+				require:	'value',
+				actions:	['strip', 'lowercase']
+			}, {
+				name:		'password',
+				type:		'string',
+				require:	'value'
+			}, {
+				name:		'password2',
+				type:		'string',
+				require:	'same as password'
+			}, {
+				name:		'remember_me',
+				type:		'boolean'
+			}
+		];
+		var sample = {
+			email_address:	'test@EXAMPLE.COM  ',
+			password:		'abc123',
+			password2:		'abc123',
+			remember_me:	1
+		};
+		var results = v.checkInput(sample, fields);
+		test.deepEqual(results, {
+			data: {
+				email_address:	'test@example.com',
+				password:		'abc123',
+				password2:		'abc123',
+				remember_me:	true
+			},
+			error: {},
+			isModified:		true,
+			messages: []
+		}, 'objects should match');
+		
+		sample = {
+			email_address:	'test_username',
+			password:		'abc123',
+			password2:		'abc12'
+		};
+		results = v.checkInput(sample, fields);
+		test.deepEqual(results, {
+			data: {
+				password:		'abc123'
+			},
+			error: {
+				email_address:	'format',
+				password2:		'require'
+			},
+			messages: [
+				'\'email_address\' is the wrong format',
+				'\'password2\' is not the same as \'password\''
+			],
+			isModified:		false
 		}, 'objects should match');
 		test.done();
 	},
