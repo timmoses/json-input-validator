@@ -1,7 +1,7 @@
 {
   "name": "json-input-validator",
   "description": "node.js module to clean and validate JSON input.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/timmoses/json-input-validator",
   "author": "Tim Moses <tim@moses.com> (http://tim.moses.com)",
   "repository": {
