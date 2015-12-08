@@ -26,9 +26,12 @@ Install the module with: `npm install json-input-validator`
 
 [**License**](#license)
 
+
 <a name="quickExamples" />
 
+
 ## Quick examples
+
 
 	var validator = require('json-input-validator');
 	
