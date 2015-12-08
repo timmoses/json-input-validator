@@ -136,6 +136,7 @@ Install the module with: `npm install json-input-validator`
 While there are many comprehensive modules that determine value types, these functions are included to provide consistency for the checkInput() function regardless of what other modules are available.
 
 <a name="type" />
+
 ### type(arg)
 
 Returns the type of the submitted argument, `arg`, as a string.
@@ -143,6 +144,7 @@ Returns the type of the submitted argument, `arg`, as a string.
 Possible return values are: 'null', 'nan', 'undefined', 'boolean', 'number', 'string', 'regexp', 'symbol', 'array', 'object', 'function'
 
 <a name="isNumber" />
+
 ### isNumber(arg)
 
 Returns `true` if `arg` is a number. `false` is returned otherwise.
@@ -154,6 +156,7 @@ Returns `true` if `arg` is a number. `false` is returned otherwise.
 	isNumber('a')					// returns false
 
 <a name="isString" />
+
 ### isString(arg)
 
 Returns `true` if `arg` is a string. `false` is returned otherwise.
@@ -164,6 +167,7 @@ Returns `true` if `arg` is a string. `false` is returned otherwise.
 	isString(1)						// returns false
 
 <a name="isRegexp" />
+
 ### isRegexp(arg)
 
 Returns `true` if `arg` is a regular expression. `false` is returned otherwise.
@@ -175,6 +179,7 @@ Returns `true` if `arg` is a regular expression. `false` is returned otherwise.
 	isRegexp(1)						// returns false
 
 <a name="isFunction" />
+
 ### isFunction(arg)
 
 Returns `true` if `arg` is a function. `false` is returned otherwise.
@@ -184,6 +189,7 @@ Returns `true` if `arg` is a function. `false` is returned otherwise.
 	isFunction('function() { }')	// returns false
 
 <a name="isArray" />
+
 ### isArray(arg)
 
 Returns `true` if `arg` is an array. `false` is returned otherwise.
@@ -194,6 +200,7 @@ Returns `true` if `arg` is an array. `false` is returned otherwise.
 	isArray(undefined)				// returns false
 
 <a name="isObject" />
+
 ### isObject(arg)
 
 Returns `true` if `arg` is an object. `false` is returned otherwise.
@@ -204,6 +211,7 @@ Returns `true` if `arg` is an object. `false` is returned otherwise.
 	isObject(undefined)				// returns false
 
 <a name="isArrayWithContent" />
+
 ### isArrayWithContent(arg)
 
 Returns `true` if `arg` is an array with one or more elements. `false` is returned otherwise.
@@ -215,6 +223,7 @@ Returns `true` if `arg` is an array with one or more elements. `false` is return
 	isArrayWithContent('a')			// returns false
 
 <a name="isObjectWithContent" />
+
 ### isObjectWithContent(arg)
 
 Returns `true` if `arg` is an object with one or more keys. `false` is returned otherwise.
@@ -225,11 +234,13 @@ Returns `true` if `arg` is an object with one or more keys. `false` is returned 
 	isObjectWithContent('a')		// returns false
 
 <a name="isDate" />
+
 ### isDate(arg)
 
 Returns `true` if `arg` is a date/time object. `false` is returned otherwise.
 
 <a name="isNothing" />
+
 ### isNothing(arg)
 
 Returns `true` if `arg` is null, undefined, or NaN. `false` is returned otherwise.
@@ -244,6 +255,7 @@ Returns `true` if `arg` is null, undefined, or NaN. `false` is returned otherwis
 	isNothing({})					// returns false
 
 <a name="isSomething" />
+
 ### isSomething(arg)
 
 Returns `true` if `arg` is not null, undefined, or NaN. `false` is returned otherwise.
@@ -258,6 +270,7 @@ Returns `true` if `arg` is not null, undefined, or NaN. `false` is returned othe
 	isSomething({})					// returns true
 
 <a name="isEmpty" />
+
 ### isEmpty(arg)
 
 Returns `true` if `arg` is null, undefined, NaN, false, 0, a blank string, an empty array, or an empty object. `false` is returned otherwise.
@@ -277,6 +290,7 @@ Returns `true` if `arg` is null, undefined, NaN, false, 0, a blank string, an em
 	isEmpty({'a':1})			// returns false
 
 <a name="isNegativeNumber" />
+
 ### isNegativeNumber(arg)
 
 Returns `true` if `arg` is a negative number. `false` is returned otherwise.
@@ -288,6 +302,7 @@ Returns `true` if `arg` is a negative number. `false` is returned otherwise.
 	isNegativeNumber('1')	// returns false (not of type number)
 
 <a name="isInteger" />
+
 ### isInteger(arg)
 
 Returns `true` if `arg` is an integer. `false` is returned otherwise.
@@ -299,6 +314,7 @@ Returns `true` if `arg` is an integer. `false` is returned otherwise.
 	isInteger('1')			// returns false (not of type number)
 
 <a name="isPositiveInteger" />
+
 ### isPositiveInteger(arg)
 
 Returns `true` if `arg` is a positive integer. `false` is returned otherwise.
@@ -310,6 +326,7 @@ Returns `true` if `arg` is a positive integer. `false` is returned otherwise.
 	isPositiveInteger('1')	// returns false (not of type number)
 
 <a name="isNegativeInteger" />
+
 ### isNegativeInteger(arg)
 
 Returns `true` if `arg` is a negative integer. `false` is returned otherwise.
@@ -321,6 +338,7 @@ Returns `true` if `arg` is a negative integer. `false` is returned otherwise.
 	isNegativeInteger('-1')	// returns false (not of type number)
 
 <a name="isDomain" />
+
 ### isDomain(arg)
 
 Returns `true` if `arg` is a valid second-level + top-level domain name, like 'example.com'. `false` is returned otherwise. Use [`isHostname`](#isHostname) if you will encounter domains of more than two levels. The top-level domain is matched against a list of possible top-level domains as of 2015-10-08. Top-level domains released after that time will not match.
@@ -332,6 +350,7 @@ Returns `true` if `arg` is a valid second-level + top-level domain name, like 'e
 	isDomain('test@example.com')			// returns false
 
 <a name="isHostname" />
+
 ### isHostname(arg)
 
 Returns `true` if `arg` is a valid hostname. `false` is returned otherwise. This uses `isDomain` to validate the top-level domain. See [`isDomain`](#isDomain) for more details.
@@ -344,6 +363,7 @@ Returns `true` if `arg` is a valid hostname. `false` is returned otherwise. This
 	isHostname('http://www.example.com')	// returns false
 
 <a name="isEmail" />
+
 ### isEmail(arg)
 
 Returns `true` if `arg` is a valid email address. `false` is returned otherwise. This uses `isDomain` to validate the top-level domain in the email address. See [`isDomain`](#isDomain) for more details.
@@ -355,6 +375,7 @@ Returns `true` if `arg` is a valid email address. `false` is returned otherwise.
 	isEmail('mailto:a@b.com')				// returns false
 
 <a name="parseHttpURL" />
+
 ### parseHttpURL(arg)
 
 Returns an object containing the components of the URL passed in `arg`. Components include: protocol, hostname, port, path, and queryString. This uses `isDomain` to validate the top-level domain. See [`isDomain`](#isDomain) for more details.
@@ -375,6 +396,7 @@ Returns an object containing the components of the URL passed in `arg`. Componen
 	//	}
 
 <a name="isHttpURL" />
+
 ### isHttpURL(arg)
 
 Returns `true` if `arg` is a valid email address. `false` is returned otherwise. This uses `isDomain` to validate the top-level domain. See [`isDomain`](#isDomain) for more details.
@@ -388,6 +410,7 @@ Returns `true` if `arg` is a valid email address. `false` is returned otherwise.
 	isHttpURL('test@mail.example.com')		// returns false
 
 <a name="parseARN" />
+
 ### parseARN(arg)
 
 Returns an object containing the components of the Amazon Resource Name (ARN) passed in `arg`. Components include: partition, service, region, accountId, and resource.
@@ -418,6 +441,7 @@ Returns an object containing the components of the Amazon Resource Name (ARN) pa
 	//	}
 
 <a name="isARN" />
+
 ### isARN(arg)
 
 Returns `true` if `arg` is a valid Amazon Resource Name (ARN). `false` is returned otherwise.
@@ -430,6 +454,7 @@ Returns `true` if `arg` is a valid Amazon Resource Name (ARN). `false` is return
 		// returns true
 
 <a name="isSesARN" />
+
 ### isSesARN(arg)
 
 Returns `true` if `arg` is a valid Simple Email Service (SES) Amazon Resource Name (ARN). `false` is returned otherwise.
@@ -444,6 +469,7 @@ Returns `true` if `arg` is a valid Simple Email Service (SES) Amazon Resource Na
 		// returns false
 
 <a name="stripObject" /><a name="stripArray" />
+
 ### stripObject(source, isEmpty), stripArray(source, isEmpty)
 
 `stripObject` and `stripArray` modifies the given object or array, `source`, by recursively removing key/value pairs 
@@ -548,6 +574,7 @@ After `stripArray`, sample contains the following:
 	//	]
 
 <a name="checkInput" />
+
 ## checkInput(data, fields)
 
 `checkInput` tests an input object and returns a converted version of the object and errors for any values that do not match the field definitions.
@@ -709,10 +736,12 @@ Sometimes users accidentally hit a space after what they type or type with caps 
 
 	
 <a name="releaseHistory" />
+
 ## Release History
 0.1	First version
 
 <a name="license" />
+
 ## License
 Copyright (c) 2015 Tim Moses  
 Licensed under the GNU license.
