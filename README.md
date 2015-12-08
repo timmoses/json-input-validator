@@ -1,18 +1,18 @@
-# json-validator
+# json-input-validator
 
-json-validator is a node module to validate and clean JSON input.
+json-input-validator is a node module to validate and clean JSON input.
 There are many [basic functions](#basicFunctions) to test types and string formats,
 but the main function, [`checkInput()`](#checkInput) can be used to validate and clean a JSON object 
 based on field definitions you specify.
 It is useful for validating JSON submitted via AJAX or submitted to an API and, when used appropriately, 
 can prevent injection attacks.
 
-Given a JSON object, json-validator will return a new object that only contains the fields that were defined and 
+Given a JSON object, json-input-validator will return a new object that only contains the fields that were defined and 
 only if the field values successfully passed the specified tests. 
 The returned value for each field is converted to the appropriate type, if possible, and is cleaned up based on the specified actions. 
 The end result is that the output can be safely passed on to the rest of the program without fear of missing, invalid, or dangerous values.
 
-Install the module with: `npm install json-validator`
+Install the module with: `npm install json-input-validator`
 
 ## Contents
 
@@ -27,9 +27,10 @@ Install the module with: `npm install json-validator`
 [**License**](#license)
 
 <a name="quickExamples" />
+
 ## Quick examples
 
-	var validator = require('json-validator');
+	var validator = require('json-input-validator');
 	
 **Define the input fields:**
 
@@ -126,6 +127,7 @@ Install the module with: `npm install json-validator`
 	};
 
 <a name="basicFunctions" />
+
 ## Basic Functions
 
 While there are many comprehensive modules that determine value types, these functions are included to provide consistency for the checkInput() function regardless of what other modules are available.
@@ -543,11 +545,11 @@ After `stripArray`, sample contains the following:
 	//	]
 
 <a name="checkInput" />
-### checkInput(data, fields)
+## checkInput(data, fields)
 
 `checkInput` tests an input object and returns a converted version of the object and errors for any values that do not match the field definitions.
 
-__Arguments__
+### Arguments
 
 * `data` - An object to be checked, usually user-entered data sent as JSON via an API call.
 * `fields` - An array of objects. Each object describes a field that should be allowed in the `data` object.
@@ -578,58 +580,130 @@ The field definition object can contain the following entries:
 	* 'uppercase' - Convert the field's value to uppercase letters.
 	* 'strip' - Strips leading and trailing whitespace from the field's value.
 
-__Output__
+### Output
 
 The output is an object with the following items.
 
 * `data` - The converted version of original input object. Only fields in the field definitions that pass their validation are included.
-* `error` - An object containing items for each failed field test. Keys in the object are the names of the fields that failed and the values are the test on which it failed. For example, if a field named 'password' has `require` set to 'value' and no value is submitted, `error` would contain at least contain a key of `password` with a value of 'require'.
-* `messages` - An array of error English error messages. This is the lazy way of displaying errors instead of using the `error` object.
+* `error` - An object containing items for each failed field test. Keys in the object are the names of the fields that failed and the values are the test on which it failed. For example, if a field named 'password' has `require` set to 'value' and no value is submitted, `error` would at least contain a key of `password` with a value of 'require'. This can be used to generate error messages for a user.
+* `messages` - An array of English error messages. This is the lazy way of displaying errors instead of using the `error` object to assemble your own.
 * `isModified` - A boolean that is `true` if any field values in `data` were modified from the original input object.
 
+### Examples of field definitions
 
-	var validator = require('json-validator');
-	
-	var incomingData = {
-		email_address:	'test@EXAMPLE.COM  ',
-		password:		'abc123',
-		password2:		'abc123',
-		remember_me:	1
-	};
-	
+For a full example, check the [**Quick Examples**](#quickExamples) section.
+
+__Example: Limiting fields in input__
+
+When receiving input from an API, you may want to make sure the incoming data only contains the fields you want in the right Javascript type. In this case, regardless of what is submitted, the returned object will only contain the three fields in the appropriate types.
+
 	var fields = [
 		{
-			name:		'email_address',
-			type:		'string',
-			format:		'email',
-			require:	'value',
-			actions:	['strip', 'lowercase']
+			name:		'first_name',
+			type:		'string'
 		}, {
+			name:		'last_name',
+			type:		'string'
+		}, {
+			name:		'age',
+			type:		'number'
+		}
+	];
+
+__Example: Requiring fields to have a value__
+
+Using the previous example, making 'first\_name' and 'last\_name' required is a matter of adding `require` to each field definition. However, setting it to 'exists' or a boolean of `true` only makes sure the field exists, but does not require a value to be in the field. To require a non-blank or non-zero value, use 'value'.
+
+	var fields = [
+		{
+			name:		'first_name',
+			type:		'string',
+			require:	'value'
+		}, {
+			name:		'last_name',
+			type:		'string',
+			require:	'value'
+		}, {
+			name:		'age',
+			type:		'number'
+		}
+	];
+
+__Example: Requiring fields to have the same value__
+
+Sometimes a requirement may be based on another field. For example, with two password fields, named `password` and `password_retype`, you could require the second match.
+
+	var fields = [
+		{
 			name:		'password',
 			type:		'string',
 			require:	'value'
 		}, {
-			name:		'password2',
+			name:		'password_retype',
 			type:		'string',
 			require:	'same as password'
-		}, {
-			name:		'remember_me',
-			type:		'boolean'
 		}
 	];
-	
-	var output = validator.checkInput(incomingData, fields);
-	
-	// output = {
-	//		data: {
-	//			email_address:	'test@example.com',
-	//			password:		'abc123',
-	//			password2:		'abc123',
-	//			remember_me:	true
-	//		},
-	//		messages: [],
-	//		isModified: true
-	// };
+
+__Example: Restricting field values by format__
+
+The value of fields can be restricted even further by requiring the input to match a certain pattern. Check for invalid email addresses or an age that isn't a positive integer using `format`.
+
+	var fields = [
+		{
+			name:		'email_address',
+			type:		'string',
+			require:	'value',
+			format:		'email'
+		}, {
+			name:		'age',
+			type:		'number',
+			require:	'value',
+			format:		'positive integer'
+		}
+	];
+
+__Example: Restricting field values by regular expression__
+
+Using `regexp`, restrict the content of a field by regular expressions. In this example, make sure the first name only contains letters.
+
+	var fields = [
+		{
+			name:		'first_name',
+			type:		'string',
+			require:	'value',
+			regexp:		/^[a-zA-Z]+$/
+		}
+	];
+
+__Example: Restricting field values by a whitelist__
+
+If there is a limited number of possible answers, a whitelist may be the best choice. A menu or radio buttons in a web form may only contain certain values, but that doesn't prevent someone from submitting other values if they know what they are doing. You can prevent that from happening with a whitelist.
+
+	var fields = [
+		{
+			name:		'color',
+			type:		'string',
+			values:		['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+		}
+	];
+
+__Example: Modifying field values with actions__
+
+Sometimes users accidentally hit a space after what they type or type with caps lock on. To prevent dumb entry problems from becoming errors, you can use actions to clean up the input automatically. For example, an email address or username shouldn't contain extra whitespace and isn't usually case sensitive. However, when comparing input against an existing record, whitespace and capitalization can prevent a match. Using `actions` can normalize the input to prevent that from being a problem. In this case, use the 'strip' action to remove leading and trailing whitespace and use the 'lowercase' action to make the input all lowercase.
+
+	var fields = [
+		{
+			name:		'username',
+			type:		'string',
+			require:	'value',
+			actions:	['strip', 'lowercase']
+		}
+	];
+
+
+
+
 	
 <a name="releaseHistory" />
 ## Release History
