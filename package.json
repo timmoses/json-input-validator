@@ -1,23 +1,23 @@
 {
-  "name": "json-validator",
+  "name": "json-input-validator",
   "description": "node.js module to clean and validate JSON input.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/timmoses/json-validator",
+  "version": "0.1.1",
+  "homepage": "https://github.com/timmoses/json-input-validator",
   "author": "Tim Moses <tim@moses.com> (http://tim.moses.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/timmoses/json-validator.git"
+    "url": "https://github.com/timmoses/json-input-validator.git"
   },
   "bugs": {
-    "url": "https://github.com/timmoses/json-validator/issues"
+    "url": "https://github.com/timmoses/json-input-validator/issues"
   },
   "licenses": [
     {
       "type": "GNU",
-      "url": "https://github.com/timmoses/json-validator/blob/master/LICENSE-GNU"
+      "url": "https://github.com/timmoses/json-input-validator/blob/master/LICENSE-GNU"
     }
   ],
-  "main": "lib/json-validator",
+  "main": "lib/json-input-validator",
   "engines": {
     "node": ">= 0.8.0"
   },
