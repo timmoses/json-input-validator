@@ -1,7 +1,7 @@
 {
   "name": "json-input-validator",
   "description": "node.js module to clean and validate JSON input.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/timmoses/json-input-validator",
   "author": "Tim Moses <tim@moses.com> (http://tim.moses.com)",
   "repository": {
@@ -34,5 +34,6 @@
   "directories": {
     "test": "test"
   },
-  "license": "GNU"
+  "license": "GNU",
+  "tonicExample": "var validator = require('json-input-validator');\nvar fieldDefinitions = [{\n    name: 'email_address',\n    type: 'string',\n    format: 'email',\n    require: 'value',\n    actions: ['strip', 'lowercase']\n}];\n// Good data that should succeed\nvar incomingData = {\n    email_address: ' test@EXAMPLE.COM  ',\n    extra_field: 'test'\n};\nvar goodOutput = validator.checkInput(incomingData, fieldDefinitions);\nconsole.log(goodOutput);\n\n// Bad data that should fail because it is not an email address\nvar incomingData = {\n    email_address: 'EXAMPLE.COM'\n};\nvar badOutput = validator.checkInput(incomingData, fieldDefinitions);\nconsole.log(badOutput);"
 }
